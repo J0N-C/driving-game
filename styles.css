@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: green;
+}
+
+#f1-car {
+  position: absolute;
+  width: 10%;
+}
+
+#f1-car-img {
+  width: 100%;
+}
