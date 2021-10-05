@@ -14,7 +14,6 @@ body {
 
 #f1-car-img {
   width: 100%;
-  transition: transform 0.25s;
 }
 
 .rotate-90 {
