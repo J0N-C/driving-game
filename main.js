@@ -5,7 +5,8 @@ const left = -90;
 const myCar = {
   currentDir: 0,
   speed: 0,
-  position: [0, 0]
+  position: [0, 0],
+  startCarId: null
 };
 
 document.addEventListener('keydown', function (event) {
@@ -57,12 +58,15 @@ function startCar(event) {
   if (event.key !== ' ') return;
   if (myCar.speed === 0) {
     myCar.speed = 1;
-    setInterval(moveCar, 16);
+    myCar.startCarId = setInterval(moveCar, 16);
+  } else {
+    myCar.speed = 0;
+    clearInterval(myCar.startCarId);
+    myCar.startCarId = null;
   }
 }
 
 function moveCar() {
   myCar.position[0] += myCar.speed;
-  $f1CarDiv.style.transition = 'transform 0.1s';
   $f1CarDiv.style.left = `${myCar.position[0]}%`;
 }
