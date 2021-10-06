@@ -6,18 +6,13 @@ const myCar = {
 };
 
 document.addEventListener('keydown', function (event) {
-  const newDir = directionalMove(event);
-  if (newDir === myCar.currentDir + 90 || (newDir === 0 && myCar.currentDir === 270)) {
-    myCar.currentDir += right;
-  }
-  if (newDir === myCar.currentDir - 90 || (newDir === 270 && myCar.currentDir === 0)) {
-    myCar.currentDir += left;
-  }
+  directionalMove(event);
   $f1Car.style.transition = 'transform 0.1s';
   $f1Car.style.transform = `rotate(${myCar.currentDir}deg)`;
   setTimeout(resetDirection, 100);
 });
 
+/* for hiding smooth transition when hitting 0/360 or -90 */
 function resetDirection() {
   if (myCar.currentDir >= 360) {
     myCar.currentDir = 0;
@@ -31,17 +26,25 @@ function resetDirection() {
   }
 }
 
+/* change direction based on key entered wasd or arrows */
 function directionalMove(event) {
+  let newDir;
   if (event.key === 'ArrowRight' || event.key === 'd') {
-    return 0;
+    newDir = 0;
   }
   if (event.key === 'ArrowUp' || event.key === 'w') {
-    return 270;
+    newDir = 270;
   }
   if (event.key === 'ArrowLeft' || event.key === 'a') {
-    return 180;
+    newDir = 180;
   }
   if (event.key === 'ArrowDown' || event.key === 's') {
-    return 90;
+    newDir = 90;
+  }
+  if (newDir === myCar.currentDir + 90 || (newDir === 0 && myCar.currentDir === 270)) {
+    myCar.currentDir += right;
+  }
+  if (newDir === myCar.currentDir - 90 || (newDir === 270 && myCar.currentDir === 0)) {
+    myCar.currentDir += left;
   }
 }
