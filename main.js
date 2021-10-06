@@ -9,6 +9,7 @@ const myCar = {
   startCarId: null
 };
 
+/* listener for direction and car start/stop */
 document.addEventListener('keydown', function (event) {
   directionalMove(event);
   startCar(event);
@@ -54,6 +55,7 @@ function directionalMove(event) {
   setTimeout(resetDirection, 100);
 }
 
+/* start or stop car */
 function startCar(event) {
   if (event.key !== ' ') return;
   if (myCar.speed === 0) {
@@ -66,6 +68,7 @@ function startCar(event) {
   }
 }
 
+/* car moves in direction of currentDir when active */
 function moveCar() {
   if (myCar.currentDir === 0) {
     myCar.position[0] += myCar.speed;
