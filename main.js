@@ -14,14 +14,13 @@ document.addEventListener('keydown', function (event) {
 
 /* for hiding smooth transition when hitting 0/360 or -90 */
 function resetDirection() {
+  $f1Car.style.transition = '';
   if (myCar.currentDir >= 360) {
     myCar.currentDir = 0;
-    $f1Car.style.transition = '';
     $f1Car.style.transform = 'rotate(0deg)';
   }
   if (myCar.currentDir === -90) {
     myCar.currentDir = 270;
-    $f1Car.style.transition = '';
     $f1Car.style.transform = 'rotate(270deg)';
   }
 }
