@@ -67,6 +67,20 @@ function startCar(event) {
 }
 
 function moveCar() {
-  myCar.position[0] += myCar.speed;
-  $f1CarDiv.style.left = `${myCar.position[0]}%`;
+  if (myCar.currentDir === 0) {
+    myCar.position[0] += myCar.speed;
+    $f1CarDiv.style.left = `${myCar.position[0]}rem`;
+  }
+  if (myCar.currentDir === 90) {
+    myCar.position[1] += myCar.speed;
+    $f1CarDiv.style.top = `${myCar.position[1]}rem`;
+  }
+  if (myCar.currentDir === 180) {
+    myCar.position[0] -= myCar.speed;
+    $f1CarDiv.style.left = `${myCar.position[0]}rem`;
+  }
+  if (myCar.currentDir === 270) {
+    myCar.position[1] -= myCar.speed;
+    $f1CarDiv.style.top = `${myCar.position[1]}rem`;
+  }
 }
