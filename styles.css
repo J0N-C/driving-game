@@ -15,11 +15,3 @@ body {
 #f1-car-img {
   width: 100%;
 }
-
-.rotate-90 {
-  transform: rotate(90deg);
-}
-
-.rotate-180 {
-  transform: rotate(180deg);
-}
