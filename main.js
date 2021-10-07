@@ -2,7 +2,10 @@ const $f1CarDiv = document.querySelector('#f1-car');
 const $f1Car = document.querySelector('#f1-car-img');
 const right = 90;
 const left = -90;
+const $carModal = document.querySelector('#car-modal');
+const $carousel = document.querySelector('#carousel');
 const myCar = {
+  model: 'images/f1.svg',
   currentDir: 0,
   speed: 0,
   position: [0, 0],
@@ -14,6 +17,8 @@ document.addEventListener('keydown', function (event) {
   directionalMove(event);
   startCar(event);
 });
+
+$carousel.addEventListener('click', changeModel);
 
 /* for hiding smooth transition when hitting 0/360 or -90 */
 function resetDirection() {
@@ -61,10 +66,12 @@ function startCar(event) {
   if (myCar.speed === 0) {
     myCar.speed = 1;
     myCar.startCarId = setInterval(moveCar, 16);
+    $carModal.className = 'hidden';
   } else {
     myCar.speed = 0;
     clearInterval(myCar.startCarId);
     myCar.startCarId = null;
+    $carModal.className = '';
   }
 }
 
@@ -86,4 +93,10 @@ function moveCar() {
     myCar.position[1] -= myCar.speed;
     $f1CarDiv.style.top = `${myCar.position[1]}rem`;
   }
+}
+
+function changeModel(event) {
+  if (event.target.tagName !== 'IMG') return;
+  myCar.model = event.target.getAttribute('src');
+  $f1Car.setAttribute('src', myCar.model);
 }
