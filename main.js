@@ -2,17 +2,23 @@ const $f1CarDiv = document.querySelector('#f1-car');
 const $f1Car = document.querySelector('#f1-car-img');
 const right = 90;
 const left = -90;
+const $carModal = document.querySelector('#car-modal');
+const $carousel = document.querySelector('#carousel');
 const myCar = {
+  model: 'images/f1.svg',
   currentDir: 0,
   speed: 0,
   position: [0, 0],
   startCarId: null
 };
 
+/* listener for direction and car start/stop */
 document.addEventListener('keydown', function (event) {
   directionalMove(event);
   startCar(event);
 });
+
+$carousel.addEventListener('click', changeModel);
 
 /* for hiding smooth transition when hitting 0/360 or -90 */
 function resetDirection() {
@@ -54,19 +60,43 @@ function directionalMove(event) {
   setTimeout(resetDirection, 100);
 }
 
+/* start or stop car */
 function startCar(event) {
   if (event.key !== ' ') return;
   if (myCar.speed === 0) {
     myCar.speed = 1;
     myCar.startCarId = setInterval(moveCar, 16);
+    $carModal.className = 'hidden';
   } else {
     myCar.speed = 0;
     clearInterval(myCar.startCarId);
     myCar.startCarId = null;
+    $carModal.className = '';
   }
 }
 
+/* car moves in direction of currentDir when active */
 function moveCar() {
-  myCar.position[0] += myCar.speed;
-  $f1CarDiv.style.left = `${myCar.position[0]}%`;
+  if (myCar.currentDir === 0) {
+    myCar.position[0] += myCar.speed;
+    $f1CarDiv.style.left = `${myCar.position[0]}rem`;
+  }
+  if (myCar.currentDir === 90) {
+    myCar.position[1] += myCar.speed;
+    $f1CarDiv.style.top = `${myCar.position[1]}rem`;
+  }
+  if (myCar.currentDir === 180) {
+    myCar.position[0] -= myCar.speed;
+    $f1CarDiv.style.left = `${myCar.position[0]}rem`;
+  }
+  if (myCar.currentDir === 270) {
+    myCar.position[1] -= myCar.speed;
+    $f1CarDiv.style.top = `${myCar.position[1]}rem`;
+  }
+}
+
+function changeModel(event) {
+  if (event.target.tagName !== 'IMG') return;
+  myCar.model = event.target.getAttribute('src');
+  $f1Car.setAttribute('src', myCar.model);
 }

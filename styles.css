@@ -7,11 +7,55 @@ body {
   background-color: green;
 }
 
+.hidden {
+  display: none !important;
+}
+
 #f1-car {
   position: absolute;
   width: 10%;
+  max-width: 150px;
+  min-width: 100px;
 }
 
-#f1-car-img {
+#f1-car-img,
+.car-option img {
   width: 100%;
+}
+
+.car-option {
+  display: flex;
+  margin: 0.5rem;
+  width: 80px;
+  height: 80px;
+  padding: 0.5rem;
+  background-color: rgb(238, 238, 238);
+}
+
+#car-modal {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+#carousel {
+  display: flex;
+  justify-content: space-around;
+  position: fixed;
+  top: 80vh;
+  padding: 0.5rem;
+  background-color: lightgray;
+}
+
+#carousel,
+.car-option {
+  border-radius: 10px;
+}
+
+.rotated {
+  transform: rotate(90deg);
+}
+
+.car-option:hover {
+  cursor: pointer;
 }
